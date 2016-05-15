@@ -1,5 +1,6 @@
 CC=gcc
 RM=rm -f
+AR=ar
 CPPFLAGS=-Iinclude
 LDFLAGS=-L.
 LDLIBS=-lrtree
@@ -24,7 +25,7 @@ endif
 all: lib
 
 lib: $(OBJS)
-	$(CC) $(OFLAGS) -o librtree.a $(OBJS)
+	$(AR) -cvq libtree.a $(OBJS)
 
 depend: .depend
 
