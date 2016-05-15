@@ -28,13 +28,13 @@ lib: $(OBJS)
 
 depend: .depend
 
-.depend: $(SRCS) $(TEST_SRCS)
+.depend: $(SRCS)
 	$(RM) -f ./.depend
 	$(CC) $(CPPFLAGS) -MM $^>>./.depend;
 
 clean:
 	$(RM) $(OBJS)
-	$(RM) $(TEST_OBJS)
+	$(RM) librtree.a
 
 dist-clean: clean
 	$(RM) *~ .depend
