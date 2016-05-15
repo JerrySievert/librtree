@@ -5,13 +5,10 @@ LDFLAGS=-L.
 LDLIBS=-lrtree
 
 SRCS=src/card.c \
-			src/gammavol.c \
 			src/index.c \
 			src/node.c \
 			src/rect.c \
-			src/sphvol.c \
-			src/split_l.c \
-			src/split_q.c
+			src/split_l.c
 
 OBJS=$(subst .c,.o,$(SRCS))
 

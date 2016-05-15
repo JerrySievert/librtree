@@ -1,6 +1,6 @@
 
 #include <stdio.h>
-#include <malloc.h>
+#include <stdlib.h>
 #include "assert.h"
 #include "index.h"
 #include "card.h"
@@ -306,7 +306,7 @@ int RTreeDeleteRect(struct Rect *R, int Tid, struct Node**Nn)
 			RTreeFreeNode(e->node);
 			RTreeFreeListNode(e);
 		}
-		
+
 		/* check for redundant root (not leaf, 1 child) and eliminate
 		*/
 		if ((*nn)->count == 1 && (*nn)->level > 0)

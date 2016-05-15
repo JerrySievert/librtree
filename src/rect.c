@@ -146,30 +146,6 @@ RectReal RTreeRectVolume(struct Rect *R)
 }
 
 
-/*-----------------------------------------------------------------------------
-| Define the NUMDIMS-dimensional volume the unit sphere in that dimension into
-| the symbol "UnitSphereVolume"
-| Note that if the gamma function is available in the math library and if the
-| compiler supports static initialization using functions, this is
-| easily computed for any dimension. If not, the value can be precomputed and
-| taken from a table. The following code can do it either way.
------------------------------------------------------------------------------*/
-
-#ifdef gamma
-
-/* computes the volume of an N-dimensional sphere. */
-/* derived from formule in "Regular Polytopes" by H.S.M Coxeter */
-static double sphere_volume(double dimension)
-{
-	static const double log_pi = log(3.1415926535);
-	double log_gamma, log_volume;
-	log_gamma = gamma(dimension/2.0 + 1);
-	log_volume = dimension/2.0 * log_pi - log_gamma;
-	return exp(log_volume);
-}
-static const double UnitSphereVolume = sphere_volume(NUMDIMS);
-
-#else
 
 /* Precomputed volumes of the unit spheres for the first few dimensions */
 const double UnitSphereVolumes[] = {
@@ -199,8 +175,6 @@ const double UnitSphereVolumes[] = {
 #	error "not enough precomputed sphere volumes"
 #endif
 #define UnitSphereVolume UnitSphereVolumes[NUMDIMS]
-
-#endif
 
 
 /*-----------------------------------------------------------------------------
