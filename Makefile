@@ -1,0 +1,45 @@
+CC=gcc
+RM=rm -f
+CPPFLAGS=-Iinclude
+LDFLAGS=-L.
+LDLIBS=-lrtree
+
+SRCS=src/card.c \
+			src/gammavol.c \
+			src/index.c \
+			src/node.c \
+			src/rect.c \
+			src/sphvol.c \
+			src/split_l.c \
+			src/split_q.c
+
+OBJS=$(subst .c,.o,$(SRCS))
+
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	OFLAGS = -dynamiclib
+endif
+ifeq ($(UNAME_S),Darwin)
+	CCFLAGS += -fPIC
+	OFLAGS = -shared
+endif
+
+all: lib
+
+lib: $(OBJS)
+	$(CC) $(OFLAGS) -o librtree.a $(OBJS)
+
+depend: .depend
+
+.depend: $(SRCS) $(TEST_SRCS)
+	$(RM) -f ./.depend
+	$(CC) $(CPPFLAGS) -MM $^>>./.depend;
+
+clean:
+	$(RM) $(OBJS)
+	$(RM) $(TEST_OBJS)
+
+dist-clean: clean
+	$(RM) *~ .depend
+
+include .depend
